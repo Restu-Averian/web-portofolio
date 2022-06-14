@@ -3,3 +3,26 @@
 @tailwind components;
 
 @tailwind utilities;
+@layer base{
+    .section{
+        @apply  snap-center w-screen h-screen flex items-center justify-center
+    }
+    .project-list{
+        @apply flex-none snap-start w-screen h-screen flex items-center justify-center
+ 
+    }
+}
+
+@layer utilities{
+   
+    ::-webkit-scrollbar{
+        width:0px;
+        background:transparent;
+        height:5px
+    }
+    ::-webkit-scrollbar-thumb{
+        background:linear-gradient(270deg,#5CFEF0 ,transparent  );;
+        border-radius:10px;
+        margin:0px 50px
+    }
+}
