@@ -1,85 +1,175 @@
 <template>
   <div
     id="app"
-    class="select-none h-screen overflow-y-scroll snap-y snap-mandatory"
+    class="
+      select-none
+      relative
+      h-screen
+      overflow-y-scroll
+      snap-y snap-mandatory
+    "
   >
-    <section class="section bg-blue-400 relative">
-      <page-one />
+    <div
+      class="
+        fixed
+        z-10
+        left-1/2
+        -translate-x-1/2 -translate-y-1/2
+        bottom-0
+        text-primary
+        flex
+        space-x-8
+      "
+    >
+      <i
+        class="cursor-pointer bx bxl-github bx-md"
+        @click="changeWeb('https://github.com/Restu-Averian')"
+      ></i>
+      <i
+        class="cursor-pointer bx bxl-linkedin-square bx-md"
+        @click="changeWeb('https://www.linkedin.com/in/restu-averian-putra/')"
+      ></i>
+    </div>
+    <confirm-leave
+      :isChangeWeb="isChangeWeb"
+      @closeModalConfidence="closeModalConfidence"
+      @leaveWeb="leaveWeb"
+    />
+    <section class="section bg-introduce relative">
+      <introducing />
+      <button
+        @click="scrollDown('skillsSection')"
+        class="
+          absolute
+          bottom-10
+          left-0
+          flex
+          items-center
+          space-y-20
+          text-white
+          flex-col
+        "
+      >
+        <div class="animate-bounce">
+          <div class="transform -rotate-90">
+            <p class="">Click or Scroll Down</p>
+          </div>
+        </div>
+
+        <i class="bx bx-down-arrow-alt bx-sm"></i>
+      </button>
+    </section>
+
+    <section class="section bg-skills relative" id="skillsSection">
+      <skills />
       <button
         @click="scrollDown('projectSection')"
-        class="absolute bottom-10 animate-bounce"
+        class="
+          absolute
+          bottom-10
+          left-0
+          flex
+          items-center
+          space-y-20
+          text-white
+          flex-col
+        "
       >
-        scrollDown
+        <div class="animate-bounce">
+          <div class="transform -rotate-90">
+            <p class="">Click or Scroll Down</p>
+          </div>
+        </div>
+        <i class="bx bx-down-arrow-alt bx-sm"></i>
       </button>
     </section>
-    <section id="projectSection" class="section bg-gray-500 relative">
-      <div class="flex h-screen overflow-x-scroll snap-x snap-mandatory">
-        <section id="projectList1" class="project-list bg-yellow-500">
-          <h1 class="text-3xl">My Project</h1>
-          <button @click="slideRight('projectList2')">></button>
-        </section>
-        <section id="projectList2" class="project-list bg-purple-300">
-          <button @click="slideLeft('projectList1')">back</button>
 
-          <h1 class="text-3xl">Project VueJS</h1>
-          <button @click="slideRight('projectList3')">></button>
-        </section>
-        <section id="projectList3" class="project-list bg-purple-400">
-          <button @click="slideLeft('projectList2')">back</button>
-
-          <h1 class="text-3xl">Project Nuxt</h1>
-          <button @click="slideRight('projectList4')">></button>
-        </section>
-        <section id="projectList4" class="project-list bg-purple-500">
-          <button @click="slideLeft('projectList3')">back</button>
-
-          <h1 class="text-3xl">Project VanillaJS</h1>
-          <button @click="slideRight('projectList5')">></button>
-        </section>
-        <section id="projectList5" class="project-list bg-purple-500">
-          <button @click="slideLeft('projectList4')">back</button>
-
-          <h1 class="text-3xl">UI/UX</h1>
-        </section>
-      </div>
+    <section id="projectSection" class="section bg-projects relative">
+      <projects />
       <button
-        @click="scrollDown('pageThree')"
-        class="absolute bottom-10 animate-bounce"
+        @click="scrollDown('certificateSection')"
+        class="
+          absolute
+          bottom-10
+          flex
+          items-center
+          space-y-20
+          text-white
+          left-0
+          flex-col
+        "
       >
-        scrollDown
+        <div class="animate-bounce">
+          <div class="transform -rotate-90">
+            <p class="">Click or Scroll Down</p>
+          </div>
+        </div>
+        <i class="bx bx-down-arrow-alt bx-sm"></i>
       </button>
     </section>
-    <section class="section bg-lime-500" id="pageThree">
-      <h1 class="text-3xl">Page Three</h1>
+
+    <section class="section bg-certificates relative" id="certificateSection">
+      <certificates />
+      <button
+        @click="scrollDown('projectSection')"
+        class="
+          absolute
+          top-10
+          flex
+          items-center
+          space-y-20
+          text-white
+          left-0
+          flex-col
+        "
+      >
+        <i class="bx bx-down-arrow-alt bx-sm rotate-180"></i>
+
+        <div class="animate-bounce">
+          <div class="transform rotate-90">
+            <p class="">Click or Scroll Up</p>
+          </div>
+        </div>
+      </button>
     </section>
   </div>
 </template>
 
 <script>
-import PageOne from "./components/PageOne/PageOneComp.vue";
+import Introducing from "./views/IntroducingViews.vue";
+import Skills from "./views/SkillsViews.vue";
+import Certificates from "./views/CertificatesViews.vue";
+import Projects from "./views/ProjectsViews.vue";
+import ConfirmLeave from "./components/ConfirmLeaveWebComp.vue";
+
 export default {
   name: "App",
   components: {
-    PageOne,
+    Introducing,
+    Projects,
+    Skills,
+    ConfirmLeave,
+    Certificates,
   },
   data() {
     return {
       pressed: false,
+      isChangeWeb: true,
+      linkLeaveWeb: "",
     };
   },
   methods: {
-    slideRight(idListProject) {
-      let projectListId = document.getElementById(`${idListProject}`);
-      projectListId.scrollIntoView({
-        behavior: "smooth",
-      });
+    changeWeb(link) {
+      this.isChangeWeb = false;
+      this.linkLeaveWeb = link;
     },
-    slideLeft(idListProject) {
-      let projectList = document.getElementById(idListProject);
-      projectList.scrollIntoView({
-        behavior: "smooth",
-      });
+    closeModalConfidence() {
+      this.isChangeWeb = true;
     },
+    leaveWeb() {
+      window.open(this.linkLeaveWeb, "_blank");
+    },
+
     scrollDown(idListProject) {
       let projectSection = document.getElementById(idListProject);
       projectSection.scrollIntoView({
@@ -91,4 +181,8 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "Avocados";
+  src: url("./font/Avocados.ttf");
+}
 </style>
