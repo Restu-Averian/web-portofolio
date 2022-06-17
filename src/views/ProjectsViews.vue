@@ -39,15 +39,15 @@
 
       <nuxtjs-proj />
 
-      <button
+      <!-- <button
         @click="slideRight('projectList4')"
         class="absolute top-1/2 right-10"
       >
         <button-slide :rotate="rotateEmptyClass" />
-      </button>
+      </button> -->
     </section>
 
-    <section id="projectList4" class="project-list relative">
+    <!-- <section id="projectList4" class="project-list relative">
       <button
         @click="slideLeft('projectList3')"
         class="absolute top-1/2 left-10"
@@ -72,7 +72,7 @@
       </button>
 
       <h1 class="text-3xl">UI/UX</h1>
-    </section>
+    </section> -->
   </div>
 </template>
 

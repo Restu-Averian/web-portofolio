@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center p-10">
-    <h1 class="text-4xl font-Avocados text-primary">Vue.js</h1>
+    <h1 class="text-4xl font-Avocados text-primary">Nuxt.js</h1>
     <div class="p-24">
       <div class="grid grid-cols-3 gap-3">
         <div
